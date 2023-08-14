@@ -13,6 +13,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var emailAlert: UILabel!
+    @IBOutlet weak var toggleImageBtn: UIImageView!
     
     var email: String = ""
     var password: String = ""
@@ -30,23 +32,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if let e = error {
                     print(e)
                 } else {
-//                    mvc.modalPresentationStyle = .overCurrentContext
-                    //        mvc.modalTransitionStyle = .crossDissolve
-                    //
-                    //        self.present(mvc, animated: true, completion: nil)
+                    let vc = HomeViewController()
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.modalTransitionStyle = .crossDissolve
+                    self.present(vc, animated: true, completion: nil)
                 }
             }
         }
     }
     
     @IBAction func registerBtnPressed(_ sender: UIButton) {
-        
+        let vc = RegisterViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true, completion: nil)
     }
     
     func initial() {
-        loginBtn.layer.cornerRadius = 5
-        registerBtn.layer.cornerRadius = 5
-        
         let toolBar =  UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtnTapped))
@@ -56,10 +58,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.inputAccessoryView = toolBar
         passwordTextField.inputAccessoryView = toolBar
         
-        emailTextField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
-        passwordTextField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
+        emailTextField.addTarget(self, action: #selector(emailDidEndEditing), for: .editingDidEnd)
+        passwordTextField.addTarget(self, action: #selector(passwordDidEndEditing), for: .editingDidEnd)
         
+        let toggleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(passwordToggle))
+        toggleImageBtn.addGestureRecognizer(toggleGestureRecognizer)
         
+        loginBtn.disable()
     }
     
     @objc func doneBtnTapped() {
@@ -67,10 +72,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        email = emailTextField.text ?? ""
+    @objc func passwordToggle() {
+        passwordTextField.isSecureTextEntry.toggle()
+        toggleImageBtn.image = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    @objc func emailDidEndEditing() {
+        if isValidEmail(emailTextField.text ?? ""){
+            emailAlert.isHidden = true
+            email = emailTextField.text ?? ""
+        }else{
+            emailAlert.isHidden = false
+            loginBtn.disable()
+        }
+    }
+    
+    @objc func passwordDidEndEditing() {
         password = passwordTextField.text ?? ""
-        
+        loginBtn.enable()
     }
     
 }

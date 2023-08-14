@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="singleLoginApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdu-We-tXf">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="PeU-QT-pCN"/>
+                    </constraints>
+                </view>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="33G-ZB-XDL">
+                    <rect key="frame" x="0.0" y="48" width="414" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="tGG-Sb-p34"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Inicio" id="4Du-Eh-MTa">
+                            <barButtonItem key="rightBarButtonItem" title="Item" image="xmark" catalog="system" id="NEY-hC-ikp">
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="logOutBtnPressed:" destination="-1" id="Tp6-HY-U6W"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                    <navigationBarAppearance key="standardAppearance">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBarAppearance>
+                </navigationBar>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="tdu-We-tXf" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6cl-nE-wJp"/>
+                <constraint firstItem="33G-ZB-XDL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="czW-zY-iDd"/>
+                <constraint firstItem="tdu-We-tXf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dwc-oZ-PPN"/>
+                <constraint firstItem="33G-ZB-XDL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="m4l-YV-lP2"/>
+                <constraint firstItem="33G-ZB-XDL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="tH6-Cl-PxI"/>
+                <constraint firstItem="tdu-We-tXf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xK3-1r-KIn"/>
+            </constraints>
+            <point key="canvasLocation" x="24" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

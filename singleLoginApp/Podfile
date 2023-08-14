@@ -7,4 +7,5 @@ target 'singleLoginApp' do
 
   # Pods for singleLoginApp
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 end

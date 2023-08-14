@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0A0441E656EF2610B5D4B9EA /* Pods_singleLoginApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3134BF994FDF2B7FC79A751 /* Pods_singleLoginApp.framework */; };
+		2F1BEF982A89D20E00C289A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BEF962A89D20E00C289A2 /* RegisterViewController.swift */; };
+		2F1BEF992A89D20E00C289A2 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F1BEF972A89D20E00C289A2 /* RegisterViewController.xib */; };
+		2F1BEF9D2A89D22D00C289A2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BEF9B2A89D22D00C289A2 /* HomeViewController.swift */; };
+		2F1BEF9E2A89D22D00C289A2 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F1BEF9C2A89D22D00C289A2 /* HomeViewController.xib */; };
+		2F1BEFA22A89D25600C289A2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BEFA02A89D25600C289A2 /* ProfileViewController.swift */; };
+		2F1BEFA32A89D25600C289A2 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F1BEFA12A89D25600C289A2 /* ProfileViewController.xib */; };
+		2F1BEFA62A89E7E700C289A2 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BEFA52A89E7E700C289A2 /* UIButton+Extension.swift */; };
 		2F3695802A887CE500D4C0B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F36957F2A887CE500D4C0B8 /* AppDelegate.swift */; };
 		2F3695822A887CE500D4C0B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3695812A887CE500D4C0B8 /* SceneDelegate.swift */; };
 		2F3695842A887CE500D4C0B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3695832A887CE500D4C0B8 /* ViewController.swift */; };
@@ -16,10 +23,16 @@
 		2F36958C2A887CE500D4C0B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F36958A2A887CE500D4C0B8 /* LaunchScreen.storyboard */; };
 		2F3695942A8890CA00D4C0B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F3695932A8890CA00D4C0B8 /* GoogleService-Info.plist */; };
 		2F3695972A889AD200D4C0B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3695952A889AD200D4C0B8 /* LoginViewController.swift */; };
-		2F3695982A889AD200D4C0B8 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3695962A889AD200D4C0B8 /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F1BEF962A89D20E00C289A2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		2F1BEF972A89D20E00C289A2 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		2F1BEF9B2A89D22D00C289A2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2F1BEF9C2A89D22D00C289A2 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		2F1BEFA02A89D25600C289A2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		2F1BEFA12A89D25600C289A2 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		2F1BEFA52A89E7E700C289A2 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		2F36957C2A887CE500D4C0B8 /* singleLoginApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = singleLoginApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F36957F2A887CE500D4C0B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F3695812A887CE500D4C0B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,7 +43,6 @@
 		2F36958D2A887CE500D4C0B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F3695932A8890CA00D4C0B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F3695952A889AD200D4C0B8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2F3695962A889AD200D4C0B8 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		9AC207CC1C08B9A5A47CF0BB /* Pods-singleLoginApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-singleLoginApp.debug.xcconfig"; path = "Target Support Files/Pods-singleLoginApp/Pods-singleLoginApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A64914D136147D88F0CE41DA /* Pods-singleLoginApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-singleLoginApp.release.xcconfig"; path = "Target Support Files/Pods-singleLoginApp/Pods-singleLoginApp.release.xcconfig"; sourceTree = "<group>"; };
 		D3134BF994FDF2B7FC79A751 /* Pods_singleLoginApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_singleLoginApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +60,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1BEF952A89D1F300C289A2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2F3695852A887CE500D4C0B8 /* Main.storyboard */,
+				2F3695952A889AD200D4C0B8 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		2F1BEF9A2A89D21300C289A2 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				2F1BEF962A89D20E00C289A2 /* RegisterViewController.swift */,
+				2F1BEF972A89D20E00C289A2 /* RegisterViewController.xib */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		2F1BEF9F2A89D23200C289A2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2F1BEF9B2A89D22D00C289A2 /* HomeViewController.swift */,
+				2F1BEF9C2A89D22D00C289A2 /* HomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2F1BEFA42A89D25A00C289A2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2F1BEFA02A89D25600C289A2 /* ProfileViewController.swift */,
+				2F1BEFA12A89D25600C289A2 /* ProfileViewController.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		2F1BEFA72A89E91B00C289A2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2F1BEFA52A89E7E700C289A2 /* UIButton+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2F3695732A887CE500D4C0B8 = {
 			isa = PBXGroup;
 			children = (
@@ -72,11 +128,11 @@
 				2F36957F2A887CE500D4C0B8 /* AppDelegate.swift */,
 				2F3695812A887CE500D4C0B8 /* SceneDelegate.swift */,
 				2F3695832A887CE500D4C0B8 /* ViewController.swift */,
-				2F3695852A887CE500D4C0B8 /* Main.storyboard */,
 				2F3695882A887CE500D4C0B8 /* Assets.xcassets */,
 				2F36958A2A887CE500D4C0B8 /* LaunchScreen.storyboard */,
 				2F36958D2A887CE500D4C0B8 /* Info.plist */,
 				2F3695932A8890CA00D4C0B8 /* GoogleService-Info.plist */,
+				2F1BEFA72A89E91B00C289A2 /* Extensions */,
 				2F3695992A889AFC00D4C0B8 /* Views */,
 			);
 			path = singleLoginApp;
@@ -85,8 +141,10 @@
 		2F3695992A889AFC00D4C0B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2F3695952A889AD200D4C0B8 /* LoginViewController.swift */,
-				2F3695962A889AD200D4C0B8 /* LoginViewController.xib */,
+				2F1BEF952A89D1F300C289A2 /* Login */,
+				2F1BEF9A2A89D21300C289A2 /* Register */,
+				2F1BEF9F2A89D23200C289A2 /* Home */,
+				2F1BEFA42A89D25A00C289A2 /* Profile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -139,6 +197,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
+				ORGANIZATIONNAME = "Percy Jacobs";
 				TargetAttributes = {
 					2F36957B2A887CE500D4C0B8 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -168,11 +227,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F3695982A889AD200D4C0B8 /* LoginViewController.xib in Resources */,
 				2F36958C2A887CE500D4C0B8 /* LaunchScreen.storyboard in Resources */,
+				2F1BEFA32A89D25600C289A2 /* ProfileViewController.xib in Resources */,
 				2F3695942A8890CA00D4C0B8 /* GoogleService-Info.plist in Resources */,
 				2F3695892A887CE500D4C0B8 /* Assets.xcassets in Resources */,
 				2F3695872A887CE500D4C0B8 /* Main.storyboard in Resources */,
+				2F1BEF9E2A89D22D00C289A2 /* HomeViewController.xib in Resources */,
+				2F1BEF992A89D20E00C289A2 /* RegisterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,9 +287,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F3695972A889AD200D4C0B8 /* LoginViewController.swift in Sources */,
+				2F1BEF982A89D20E00C289A2 /* RegisterViewController.swift in Sources */,
 				2F3695842A887CE500D4C0B8 /* ViewController.swift in Sources */,
 				2F3695802A887CE500D4C0B8 /* AppDelegate.swift in Sources */,
+				2F1BEFA22A89D25600C289A2 /* ProfileViewController.swift in Sources */,
+				2F1BEFA62A89E7E700C289A2 /* UIButton+Extension.swift in Sources */,
 				2F3695822A887CE500D4C0B8 /* SceneDelegate.swift in Sources */,
+				2F1BEF9D2A89D22D00C289A2 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="singleLoginApp" customModuleProvider="target">
+            <connections>
+                <outlet property="image" destination="gTg-S7-GHf" id="T1Y-Td-kVd"/>
+                <outlet property="imageView" destination="pNf-73-l0L" id="CEJ-K2-Fka"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rq-2y-4gc">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="o7T-f6-59E"/>
+                    </constraints>
+                </view>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPU-w4-IhP">
+                    <rect key="frame" x="0.0" y="48" width="414" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="LRA-ci-LjL"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Perfil" id="T1f-fu-ynh">
+                            <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward" catalog="system" id="gwe-vD-1h0">
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="backBtnPressed:" destination="-1" id="zKr-Ta-4Pf"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                    <navigationBarAppearance key="standardAppearance">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBarAppearance>
+                </navigationBar>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-73-l0L">
+                    <rect key="frame" x="132" y="158" width="150" height="150"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTg-S7-GHf">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="gTg-S7-GHf" firstAttribute="top" secondItem="pNf-73-l0L" secondAttribute="top" id="1P6-Ko-qGU"/>
+                        <constraint firstAttribute="trailing" secondItem="gTg-S7-GHf" secondAttribute="trailing" id="5Cm-yu-qPG"/>
+                        <constraint firstAttribute="bottom" secondItem="gTg-S7-GHf" secondAttribute="bottom" id="HIQ-WI-3r5"/>
+                        <constraint firstAttribute="width" constant="150" id="NOL-Fg-eLa"/>
+                        <constraint firstAttribute="height" constant="150" id="VbK-T8-2br"/>
+                        <constraint firstItem="gTg-S7-GHf" firstAttribute="leading" secondItem="pNf-73-l0L" secondAttribute="leading" id="jJ3-KZ-ZCx"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="pNf-73-l0L" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="E2O-rI-IRZ"/>
+                <constraint firstItem="9rq-2y-4gc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MAP-TT-HMJ"/>
+                <constraint firstItem="pNf-73-l0L" firstAttribute="top" secondItem="NPU-w4-IhP" secondAttribute="bottom" constant="60" id="VwK-ah-g6e"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NPU-w4-IhP" secondAttribute="trailing" id="Y50-aU-8Fc"/>
+                <constraint firstItem="NPU-w4-IhP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Y6i-Q5-NKr"/>
+                <constraint firstItem="9rq-2y-4gc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="byS-yW-9xe"/>
+                <constraint firstItem="NPU-w4-IhP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iz7-q3-kco"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9rq-2y-4gc" secondAttribute="trailing" id="kYa-aI-dfH"/>
+            </constraints>
+            <point key="canvasLocation" x="50" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
