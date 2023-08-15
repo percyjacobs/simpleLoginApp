@@ -202,7 +202,7 @@ class RegisterViewController: BaseViewController, UITextFieldDelegate {
             shortPassAlertLabel.isHidden = true
             checkData()
         }else{
-            password = ""
+            password = passwordTextField.text ?? ""
             shortPassAlertLabel.isHidden = false
             checkData()
         }
@@ -221,7 +221,7 @@ class RegisterViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func checkData() {
-        if username != "" && email != "" && password == confPassword {
+        if username != "" && email != "" && shortPassAlertLabel.isHidden && password == confPassword {
             registerBtn.enable()
         }else{
             registerBtn.disable()
