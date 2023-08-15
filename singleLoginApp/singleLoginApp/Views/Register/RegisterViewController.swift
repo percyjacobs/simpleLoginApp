@@ -8,44 +8,56 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
+class RegisterViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var emailAlertLabel: UILabel!
+    @IBOutlet weak var shortPassAlertLabel: UILabel!
+    @IBOutlet weak var passConfAlertLabel: UILabel!
     @IBOutlet weak var toggleImgBtn: UIImageView!
     @IBOutlet weak var toggleConfImgBtn: UIImageView!
+    @IBOutlet weak var imageView: UIView!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var selectImgLabel: UILabel!
     
     var username: String = ""
     var email: String = ""
     var password: String = ""
     var confPassword: String = ""
+    let db = Firestore.firestore()
+    var loader: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initial()
     }
-
     
     func initial() {
-        let toolBar =  UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtnTapped))
+        imageView.layer.cornerRadius = imageView.bounds.height / 2
+        imageView.layer.shadowColor = UIColor.gray.cgColor
+        imageView.layer.shadowOpacity = 0.4
+        imageView.layer.shadowOffset = CGSize(width: 1, height: 2)
+        imageView.layer.shadowRadius = 4
+        imageView.layer.shouldRasterize = true
+        imageView.layer.rasterizationScale = UIScreen.main.scale
+        image.layer.cornerRadius = imageView.bounds.height / 2
         
-        toolBar.setItems([flexSpace, doneButton], animated: true)
-        toolBar.sizeToFit()
-        userTextField.inputAccessoryView = toolBar
-        emailTextField.inputAccessoryView = toolBar
-        passwordTextField.inputAccessoryView = toolBar
-        confirmPasswordTextField.inputAccessoryView = toolBar
+        let chooseImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
+        imageView.addGestureRecognizer(chooseImageTapGesture)
         
-        emailTextField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
+        userTextField.addTarget(self, action: #selector(userDidEndEditing), for: .editingDidEnd)
+        emailTextField.addTarget(self, action: #selector(emailDidEndEditing), for: .editingDidEnd)
         passwordTextField.addTarget(self, action: #selector(passwordDidEndEditing), for: .editingDidEnd)
-        confirmPasswordTextField.addTarget(self, action: #selector(textFieldDidChangeSelection), for: .editingChanged)
+        passwordTextField.textContentType = .oneTimeCode
+        confirmPasswordTextField.addTarget(self, action: #selector(confPassDidChangeEditing), for: .editingDidEnd)
+        confirmPasswordTextField.textContentType = .oneTimeCode
         
         let toggleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(passwordToggle))
         toggleImgBtn.addGestureRecognizer(toggleGestureRecognizer)
@@ -55,57 +67,93 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         registerBtn.disable()
     }
     
-    @objc func doneBtnTapped() {
-        emailTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-        confirmPasswordTextField.resignFirstResponder()
-    }
-    
     @objc func passwordToggle() {
         passwordTextField.isSecureTextEntry.toggle()
+        if let textRange = passwordTextField.textRange(from: passwordTextField.beginningOfDocument, to: passwordTextField.endOfDocument) {
+            passwordTextField.replace(textRange, withText: passwordTextField.text!)
+        }
         toggleImgBtn.image = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
     }
     
     @objc func confPasswordToggle() {
         confirmPasswordTextField.isSecureTextEntry.toggle()
+        if let textRange = confirmPasswordTextField.textRange(from: confirmPasswordTextField.beginningOfDocument, to: confirmPasswordTextField.endOfDocument) {
+            confirmPasswordTextField.replace(textRange, withText: confirmPasswordTextField.text!)
+        }
         toggleConfImgBtn.image = confirmPasswordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
     }
     
     @IBAction func registerBtnPressed(_ sender: UIButton) {
-        if username != "" && email != "" {
+        if image.image != UIImage(systemName: "photo.circle"){
             register()
         }else{
-            print("FRACASO")
+            showAlert(title: "Información", message: "No ha seleccionado imagen para completar el registro.", buttonText: "Entendido")
         }
     }
     
     func register() {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let e = error {
-                print(e)
+                self.showAlert(title: "Error", message: e.localizedDescription, buttonText: "Entendido")
             } else {
-                self.updateData()
+                self.uploadImage()
             }
         }
     }
     
-    func updateData() {
+    func updateData(image: URL) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let e = error {
-                print(e)
+                self.showAlert(title: "Error", message: e.localizedDescription, buttonText: "Entendido")
             }else{
                 let user = Auth.auth().currentUser
-                print(user)
                 if let user = user {
-                    let changeRequest = user.createProfileChangeRequest()
-                    
-                    changeRequest.displayName = self.username
-                    changeRequest.photoURL =
-                    URL(string: "https://example.com/jane-q-user/profile.jpg")
-                    changeRequest.commitChanges { error in
-                        print(error)
+                    self.saveDataDB(image: image, uid: user.uid)
+                }
+            }
+        }
+    }
+    
+    func saveDataDB(image: URL, uid: String) {
+        let data: [String: Any] = [
+            "first": "",
+            "last": "",
+            "username": username,
+            "email": email,
+            "photo": image.absoluteString
+        ]
+        
+        db.collection("users").document(uid).setData(data) { error in
+            if let error {
+                self.showAlert(title: "Error", message: error.localizedDescription, buttonText: "Entendido")
+                self.signOut()
+            } else {
+                self.signOut()
+            }
+        }
+    }
+    
+    func uploadImage() {
+        loader = loader()
+        let user = Auth.auth().currentUser
+        let storage = Storage.storage()
+        let storageReference = storage.reference()
+        
+        let mediaFolder = storageReference.child("media")
+        if let data = image.image?.jpegData(compressionQuality: 0.5) {
+            let imageReference = mediaFolder.child("\(user!.uid).jpg")
+            imageReference.putData(data, metadata: nil) { metadata, error in
+                if error != nil {
+                    self.showAlert(title: "Error!", message: error?.localizedDescription ?? "Error!", buttonText: "Entendido")
+                } else {
+                    imageReference.downloadURL { url, error in
+                        self.stopLoader(loader: self.loader!)
+                        if error == nil {
+                            self.updateData(image: url ?? URL(string: "https://example.com/jane-q-user/profile.jpg")!)
+                        }else{
+                            self.showAlert(title: "Error", message: error?.localizedDescription ?? "Error inesperado.", buttonText: "Entendido")
+                        }
                     }
-                    self.signOut()
                 }
             }
         }
@@ -114,40 +162,65 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     func signOut() {
         do {
             try Auth.auth().signOut()
-            dismiss(animated: true)
+            
+            let alert = UIAlertController(title: "Registro Exitoso", message: "Se ha creado el usuario correctamente.", preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: "Entendido", style: UIAlertAction.Style.default, handler: { action in
+                self.view.window?.rootViewController?.dismiss(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
         } catch let signOutError as NSError {
             showAlert(title: "Error", message: signOutError as! String, buttonText: "Entendido")
         }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    @objc func userDidEndEditing() {
         username = userTextField.text ?? ""
-        
+    }
+    
+    @objc func emailDidEndEditing() {
         if isValidEmail(emailTextField.text ?? "") {
             email = emailTextField.text ?? ""
             emailAlertLabel.isHidden = true
         }else{
+            email = ""
             registerBtn.disable()
             emailAlertLabel.isHidden = false
         }
-        
     }
     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
     
     @objc func passwordDidEndEditing() {
-        password = passwordTextField.text ?? ""
+        if (passwordTextField.text?.count ?? 0) > 5 {
+            password = passwordTextField.text ?? ""
+            shortPassAlertLabel.isHidden = true
+            checkData()
+        }else{
+            shortPassAlertLabel.isHidden = false
+            checkData()
+        }
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+    @objc func confPassDidChangeEditing() {
         confPassword = confirmPasswordTextField.text ?? ""
         
         if password == confPassword {
+            passConfAlertLabel.isHidden = true
+            checkData()
+        }else{
+            passConfAlertLabel.isHidden = false
+            checkData()
+        }
+    }
+    
+    func checkData() {
+        if username != "" && email != "" && password == confPassword {
             registerBtn.enable()
         }else{
             registerBtn.disable()
@@ -158,13 +231,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true)
     }
     
-    func showAlert(title: String, message: String, buttonText: String, buttonText2: String? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: buttonText, style: UIAlertAction.Style.default, handler: nil))
-        if let buttonText2 {
-            alert.addAction(UIAlertAction(title: buttonText2, style: UIAlertAction.Style.cancel, handler: nil))
-        }
-        self.present(alert, animated: true, completion: nil)
+}
+
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        image.image = info[.originalImage] as? UIImage
+        selectImgLabel.isHidden = true
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func chooseImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
     }
 }

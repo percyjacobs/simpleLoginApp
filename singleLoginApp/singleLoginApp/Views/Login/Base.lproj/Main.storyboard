@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="singleLoginApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="singleLoginApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,6 +54,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="Jck-h7-tch"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Iniciar sesión">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
@@ -73,7 +74,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Correo ingresado no es válido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fio-J8-bza">
-                                <rect key="frame" x="45" y="475" width="175" height="15"/>
+                                <rect key="frame" x="45" y="475" width="314" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.98823529409999999" green="0.19215686269999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -98,6 +99,7 @@
                             <constraint firstItem="uac-WU-2fb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Gki-GD-xz0"/>
                             <constraint firstItem="sSt-JB-xRO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hje-I9-bCa"/>
                             <constraint firstItem="sSt-JB-xRO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="IiZ-GX-PY8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fio-J8-bza" secondAttribute="trailing" constant="55" id="MBp-a0-K6u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uac-WU-2fb" secondAttribute="trailing" constant="45" id="RQs-bX-aOA"/>
                             <constraint firstItem="VWo-h4-JUJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="45" id="Ugy-t8-pAC"/>
                             <constraint firstItem="TAH-JB-lpB" firstAttribute="top" secondItem="uac-WU-2fb" secondAttribute="bottom" constant="20" id="V5x-F0-4ee"/>

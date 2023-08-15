@@ -7,8 +7,9 @@
 
 import UIKit
 import Firebase
+import Security
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
@@ -21,22 +22,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initial()
     }
-
-    @IBAction func loginBtnPressed(_ sender: UIButton) {
+    
+    func initial() {
+        emailTextField.addTarget(self, action: #selector(emailDidEndEditing), for: .editingDidEnd)
+        passwordTextField.addTarget(self, action: #selector(passwordDidEndEditing), for: .editingDidEnd)
         
-        if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                if let e = error {
-                    print(e)
-                } else {
-                    let vc = HomeViewController()
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.modalTransitionStyle = .crossDissolve
-                    self.present(vc, animated: true, completion: nil)
-                }
+        let toggleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(passwordToggle))
+        toggleImageBtn.addGestureRecognizer(toggleGestureRecognizer)
+        
+        loginBtn.disable()
+        registerBtn.enable()
+    }
+    
+    @IBAction func loginBtnPressed(_ sender: UIButton) {
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        loginBtn.disable()
+        
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let e = error {
+                self.showAlert(title: "Error", message: e.localizedDescription, buttonText: "Entendido")
+            } else {
+                let vc = HomeViewController()
+                vc.modalPresentationStyle = .overCurrentContext
+                vc.modalTransitionStyle = .crossDissolve
+                self.present(vc, animated: true, completion: nil)
             }
         }
     }
@@ -48,38 +61,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         present(vc, animated: true, completion: nil)
     }
     
-    func initial() {
-        let toolBar =  UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtnTapped))
-        
-        toolBar.setItems([flexSpace, doneButton], animated: true)
-        toolBar.sizeToFit()
-        emailTextField.inputAccessoryView = toolBar
-        passwordTextField.inputAccessoryView = toolBar
-        
-        emailTextField.addTarget(self, action: #selector(emailDidEndEditing), for: .editingDidEnd)
-        passwordTextField.addTarget(self, action: #selector(passwordDidEndEditing), for: .editingDidEnd)
-        
-        let toggleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(passwordToggle))
-        toggleImageBtn.addGestureRecognizer(toggleGestureRecognizer)
-        
-        loginBtn.disable()
-    }
-    
-    @objc func doneBtnTapped() {
-        emailTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-    }
-    
     @objc func passwordToggle() {
         passwordTextField.isSecureTextEntry.toggle()
+        if let textRange = passwordTextField.textRange(from: passwordTextField.beginningOfDocument, to: passwordTextField.endOfDocument) {
+            passwordTextField.replace(textRange, withText: passwordTextField.text!)
+        }
         toggleImageBtn.image = passwordTextField.isSecureTextEntry ? UIImage(systemName: "eye.slash") : UIImage(systemName: "eye")
     }
     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
@@ -88,15 +80,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if isValidEmail(emailTextField.text ?? ""){
             emailAlert.isHidden = true
             email = emailTextField.text ?? ""
+            checkData()
         }else{
+            email = ""
             emailAlert.isHidden = false
-            loginBtn.disable()
+            checkData()
         }
     }
     
     @objc func passwordDidEndEditing() {
         password = passwordTextField.text ?? ""
-        loginBtn.enable()
+        checkData()
+    }
+    
+    func checkData() {
+        if email != "" && password != "" {
+            loginBtn.enable()
+        }else{
+            loginBtn.disable()
+        }
     }
     
 }

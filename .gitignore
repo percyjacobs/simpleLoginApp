@@ -1,3 +1,6 @@
+1052
+1002
+
 ## Build generated
 build/
 DerivedData/
@@ -92,7 +95,7 @@ xcuserdata/
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode$
 build/
 DerivedData/
-*.moved-aside   
+*.moved-aside
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -101,7 +104,7 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3   
 !default.perspectivev3
- 
+
 ## Xcode Patch
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
@@ -109,9 +112,13 @@ DerivedData/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 
-.DS_Store   
 .idea/*
-../.DS_Store
 singleLoginApp.xcworkspace/*
 singleLoginApp.xcodeproj/project.xcworkspace/xcuserdata/*
 singleLoginApp.xcodeproj/xcuserdata/*
+singleLoginApp.xcodeproj/xcshareddata/*
+
+.DS_Store
+*.plist
+
+*.xcworkspacedata

@@ -9,52 +9,66 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController {
-
+class HomeViewController: BaseViewController {
+    @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var logOutView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let uid = user.uid
-            let email = user.email
-            let photoURL = user.photoURL
-            let displayName = user.displayName
-            print(user)
-            print(uid)
-            print(email)
-            print(photoURL)
-            print(displayName)
-        }
+        initial()
+    }
+    
+    func initial() {
+        profileView.layer.cornerRadius = 10
+        profileView.layer.shadowColor = UIColor.gray.cgColor
+        profileView.layer.shadowOpacity = 0.4
+        profileView.layer.shadowOffset = CGSize(width: 1, height: 2)
+        profileView.layer.shadowRadius = 3
+        profileView.layer.shouldRasterize = true
+        profileView.layer.rasterizationScale = UIScreen.main.scale
+        logOutView.layer.cornerRadius = 10
+        logOutView.layer.shadowColor = UIColor.gray.cgColor
+        logOutView.layer.shadowOpacity = 0.4
+        logOutView.layer.shadowOffset = CGSize(width: 1, height: 2)
+        logOutView.layer.shadowRadius = 3
+        logOutView.layer.shouldRasterize = true
+        logOutView.layer.rasterizationScale = UIScreen.main.scale
+        
+        let profileGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileTapped))
+        profileView.addGestureRecognizer(profileGestureRecognizer)
+        let logOutGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(logOut))
+        logOutView.addGestureRecognizer(logOutGestureRecognizer)
     }
     
     @IBAction func logOutBtnPressed(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Cerrar sesión", message: "¿Estás seguro de querer salir?", preferredStyle: UIAlertController.Style.alert)
+        logOut()
+    }
+    
+    @objc func profileTapped() {
+        let vc = ProfileViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func logOut() {
+        let alert = UIAlertController(title: "Cerrar sesión", message: "¿Está seguro de querer salir?", preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "Sí", style: UIAlertAction.Style.default, handler: { action in
-            self.logOut()
+            self.logOutService()
         }))
         alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertAction.Style.cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
     
-    func logOut() {
+    func logOutService() {
         do {
             try Auth.auth().signOut()
-            navigationController?.popToRootViewController(animated: true)
+            self.view.window?.rootViewController?.dismiss(animated: true)
         } catch let signOutError as NSError {
             showAlert(title: "Error", message: signOutError as! String, buttonText: "Entendido")
         }
-    }
-    
-    func showAlert(title: String, message: String, buttonText: String, buttonText2: String? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: buttonText, style: UIAlertAction.Style.default, handler: nil))
-        if let buttonText2 {
-            alert.addAction(UIAlertAction(title: buttonText2, style: UIAlertAction.Style.cancel, handler: nil))
-        }
-        self.present(alert, animated: true, completion: nil)
     }
 }

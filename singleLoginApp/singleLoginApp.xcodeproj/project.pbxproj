@@ -23,6 +23,8 @@
 		2F36958C2A887CE500D4C0B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F36958A2A887CE500D4C0B8 /* LaunchScreen.storyboard */; };
 		2F3695942A8890CA00D4C0B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F3695932A8890CA00D4C0B8 /* GoogleService-Info.plist */; };
 		2F3695972A889AD200D4C0B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3695952A889AD200D4C0B8 /* LoginViewController.swift */; };
+		2F6884CB2A8AD7FF00C79706 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6884CA2A8AD7FF00C79706 /* BaseViewController.swift */; };
+		2FFEC3AC2A8AAF2E0092DB88 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFEC3AB2A8AAF2E0092DB88 /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		2F36958D2A887CE500D4C0B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F3695932A8890CA00D4C0B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F3695952A889AD200D4C0B8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2F6884CA2A8AD7FF00C79706 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		2FFEC3AB2A8AAF2E0092DB88 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		9AC207CC1C08B9A5A47CF0BB /* Pods-singleLoginApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-singleLoginApp.debug.xcconfig"; path = "Target Support Files/Pods-singleLoginApp/Pods-singleLoginApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A64914D136147D88F0CE41DA /* Pods-singleLoginApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-singleLoginApp.release.xcconfig"; path = "Target Support Files/Pods-singleLoginApp/Pods-singleLoginApp.release.xcconfig"; sourceTree = "<group>"; };
 		D3134BF994FDF2B7FC79A751 /* Pods_singleLoginApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_singleLoginApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				2F1BEFA52A89E7E700C289A2 /* UIButton+Extension.swift */,
+				2F6884CA2A8AD7FF00C79706 /* BaseViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 				2F36958D2A887CE500D4C0B8 /* Info.plist */,
 				2F3695932A8890CA00D4C0B8 /* GoogleService-Info.plist */,
 				2F1BEFA72A89E91B00C289A2 /* Extensions */,
+				2FFEC3AD2A8AAF8A0092DB88 /* Structs */,
 				2F3695992A889AFC00D4C0B8 /* Views */,
 			);
 			path = singleLoginApp;
@@ -147,6 +153,14 @@
 				2F1BEFA42A89D25A00C289A2 /* Profile */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2FFEC3AD2A8AAF8A0092DB88 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				2FFEC3AB2A8AAF2E0092DB88 /* UserData.swift */,
+			);
+			path = Structs;
 			sourceTree = "<group>";
 		};
 		D8A575B2D9F8E975E38333C7 /* Frameworks */ = {
@@ -289,7 +303,9 @@
 				2F3695972A889AD200D4C0B8 /* LoginViewController.swift in Sources */,
 				2F1BEF982A89D20E00C289A2 /* RegisterViewController.swift in Sources */,
 				2F3695842A887CE500D4C0B8 /* ViewController.swift in Sources */,
+				2FFEC3AC2A8AAF2E0092DB88 /* UserData.swift in Sources */,
 				2F3695802A887CE500D4C0B8 /* AppDelegate.swift in Sources */,
+				2F6884CB2A8AD7FF00C79706 /* BaseViewController.swift in Sources */,
 				2F1BEFA22A89D25600C289A2 /* ProfileViewController.swift in Sources */,
 				2F1BEFA62A89E7E700C289A2 /* UIButton+Extension.swift in Sources */,
 				2F3695822A887CE500D4C0B8 /* SceneDelegate.swift in Sources */,
@@ -441,16 +457,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C3XG6U7F5N;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = singleLoginApp/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_CFBundleDisplayName = "Single Login App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -472,16 +488,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C3XG6U7F5N;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = singleLoginApp/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_CFBundleDisplayName = "Single Login App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

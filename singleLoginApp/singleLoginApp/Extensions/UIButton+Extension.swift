@@ -12,15 +12,16 @@ import UIKit
 extension UIButton{
     
     func enable(){
-        self.backgroundColor = UIColor.cyan
+        self.backgroundColor = UIColor.systemCyan
         self.setTitleColor(.white, for: .normal)
         self.isEnabled = true
         self.layer.cornerRadius = 5
     }
     
     func disable(){
+        self.backgroundColor = UIColor.systemGray4
+        self.setTitleColor(.white, for: .disabled)
         self.isEnabled = false
-        self.backgroundColor = UIColor.systemGray
         self.layer.cornerRadius = 5
     }
 }
