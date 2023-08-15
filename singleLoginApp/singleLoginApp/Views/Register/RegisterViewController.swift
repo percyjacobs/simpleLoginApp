@@ -202,6 +202,7 @@ class RegisterViewController: BaseViewController, UITextFieldDelegate {
             shortPassAlertLabel.isHidden = true
             checkData()
         }else{
+            password = ""
             shortPassAlertLabel.isHidden = false
             checkData()
         }
