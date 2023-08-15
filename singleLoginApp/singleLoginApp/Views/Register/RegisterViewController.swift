@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import AVKit
+import Photos
 
 class RegisterViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var userTextField: UITextField!
@@ -65,6 +67,23 @@ class RegisterViewController: BaseViewController, UITextFieldDelegate {
         toggleConfImgBtn.addGestureRecognizer(toggleConfGestureRecognizer)
         
         registerBtn.disable()
+        
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                
+            } else {
+                
+            }
+        }
+        
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    
+                } else {}
+            })
+        }
     }
     
     @objc func passwordToggle() {

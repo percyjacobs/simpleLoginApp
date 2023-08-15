@@ -16,6 +16,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var emailAlert: UILabel!
     @IBOutlet weak var toggleImageBtn: UIImageView!
+    @IBOutlet weak var imageView: UIView!
     
     var email: String = ""
     var password: String = ""
@@ -27,6 +28,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func initial() {
+        imageView.layer.cornerRadius = 25
+        imageView.layer.shadowColor = UIColor.gray.cgColor
+        imageView.layer.shadowOpacity = 0.4
+        imageView.layer.shadowOffset = CGSize(width: 1, height: 2)
+        imageView.layer.shadowRadius = 4
+        imageView.layer.shouldRasterize = true
+        imageView.layer.rasterizationScale = UIScreen.main.scale
         emailTextField.addTarget(self, action: #selector(emailDidEndEditing), for: .editingDidEnd)
         passwordTextField.addTarget(self, action: #selector(passwordDidEndEditing), for: .editingDidEnd)
         
@@ -40,6 +48,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func loginBtnPressed(_ sender: UIButton) {
         emailTextField.text = ""
         passwordTextField.text = ""
+        email = ""
+        password = ""
         loginBtn.disable()
         
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in

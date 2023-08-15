@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import AVKit
+import Photos
 
 class ProfileViewController: BaseViewController, UITextFieldDelegate  {
     @IBOutlet weak var imageView: UIView!
@@ -36,25 +38,6 @@ class ProfileViewController: BaseViewController, UITextFieldDelegate  {
         super.viewDidLoad()
         
         initial()
-    }
-    
-    
-    @IBAction func backBtnPressed(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-    }
-    
-    @IBAction func editData(_ sender: UIButton) {
-        usernameTextField.isUserInteractionEnabled = !usernameTextField.isUserInteractionEnabled
-        nameTextField.isUserInteractionEnabled = !nameTextField.isUserInteractionEnabled
-        lastnameTextField.isUserInteractionEnabled = !lastnameTextField.isUserInteractionEnabled
-        emailTextField.isUserInteractionEnabled = !emailTextField.isUserInteractionEnabled
-        imageView.isUserInteractionEnabled = !imageView.isUserInteractionEnabled
-        selectImgLabel.isHidden = !selectImgLabel.isHidden
-        
-        usernameTextField.backgroundColor = usernameTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
-        nameTextField.backgroundColor = nameTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
-        lastnameTextField.backgroundColor = lastnameTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
-        emailTextField.backgroundColor = emailTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
     }
     
     func initial(){
@@ -84,6 +67,41 @@ class ProfileViewController: BaseViewController, UITextFieldDelegate  {
         }
         
         updateBtn.disable()
+        
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                
+            } else {
+                
+            }
+        }
+        
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    
+                } else {}
+            })
+        }
+    }
+    
+    @IBAction func backBtnPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func editData(_ sender: UIButton) {
+        usernameTextField.isUserInteractionEnabled = !usernameTextField.isUserInteractionEnabled
+        nameTextField.isUserInteractionEnabled = !nameTextField.isUserInteractionEnabled
+        lastnameTextField.isUserInteractionEnabled = !lastnameTextField.isUserInteractionEnabled
+        emailTextField.isUserInteractionEnabled = !emailTextField.isUserInteractionEnabled
+        imageView.isUserInteractionEnabled = !imageView.isUserInteractionEnabled
+        selectImgLabel.isHidden = !selectImgLabel.isHidden
+        
+        usernameTextField.backgroundColor = usernameTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
+        nameTextField.backgroundColor = nameTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
+        lastnameTextField.backgroundColor = lastnameTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
+        emailTextField.backgroundColor = emailTextField.isUserInteractionEnabled ? UIColor.white : UIColor.systemGray5
     }
     
     @objc func userDidEndEditing() {
@@ -279,6 +297,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         image.image = info[.originalImage] as? UIImage
         selectImgLabel.isHidden = true
         imageChanged = true
+        checkData()
         self.dismiss(animated: true, completion: nil)
     }
     

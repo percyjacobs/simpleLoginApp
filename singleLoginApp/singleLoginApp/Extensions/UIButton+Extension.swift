@@ -12,7 +12,7 @@ import UIKit
 extension UIButton{
     
     func enable(){
-        self.backgroundColor = UIColor.systemCyan
+        self.backgroundColor = UIColor.systemTeal
         self.setTitleColor(.white, for: .normal)
         self.isEnabled = true
         self.layer.cornerRadius = 5
